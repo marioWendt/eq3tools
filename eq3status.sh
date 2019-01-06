@@ -15,9 +15,9 @@ done
 #echo $hexdat
 
 statusR=$(timeout 5 gatttool -b $maca --char-write-req -a 0x0411 -n 03$hexdat --listen)
-statusR=$(echo $statusR |grep -o ".................$"); #echo $statusR #if vacation-mode is active 3 more bytes are attached !!!
+statusR=$(echo ${statusR^^} |grep -o ".................$"); #echo $statusR #if vacation-mode is active 3 more bytes are attached !!!
 
-hexi=$(echo ${statusR^^} |cut -d" " -f3)
+hexi=$(echo $statusR |cut -d" " -f3)
 modo=$(echo "ibase=16; $hexi"|bc)
 #echo $modo
 
